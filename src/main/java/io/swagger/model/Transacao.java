@@ -1,16 +1,17 @@
 package io.swagger.model;
 
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.model.Conta;
-import org.threeten.bp.OffsetDateTime;
-import org.springframework.validation.annotation.Validated;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import org.springframework.validation.annotation.Validated;
+import org.threeten.bp.OffsetDateTime;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Transacao
