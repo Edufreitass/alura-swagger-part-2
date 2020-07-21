@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import io.swagger.annotations.ApiParam;
+import io.swagger.customizacao.service.ClienteService;
+import io.swagger.customizacao.util.RespostasUtil;
 import io.swagger.model.Cliente;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-07-21T12:37:02.908Z")
@@ -19,14 +21,14 @@ public class ClienteApiController implements ClienteApi {
 	private ClienteService clienteService;
 
 	@Autowired
-	private RespostaUtil respostaUtil;
+	private RespostasUtil respostasUtil;
 
 	public ResponseEntity<Cliente> cadastraCliente(@ApiParam(value = "") @Valid @RequestBody Cliente cliente_) {
 
 		try {
 			return clienteService.salva(cliente_);
 		} catch (Exception e) {
-			return respostaUtil.getErroInternoCliente(ClienteService.FALHA_AO_TENTAR_CADASTRAR_UM_CLIENTE);
+			return respostasUtil.getErroInternoCliente(ClienteService.FALHA_AO_TENTAR_CADASTRAR_UM_CLIENTE);
 		}
 	}
 
