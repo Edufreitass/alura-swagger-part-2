@@ -1,7 +1,5 @@
 package io.swagger.api;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -51,15 +49,19 @@ public class TransacaoApiController implements TransacaoApi {
 			@ApiParam(value = "", required = true) @PathVariable("codigo") Long codigo,
 			@NotNull @ApiParam(value = "", required = true) @Valid @RequestParam(value = "valor", required = true) Double valor,
 			@ApiParam(value = "", required = true) @RequestHeader(value = "Authorization", required = true) String authorization) {
-		String accept = request.getHeader("Accept");
-		return new ResponseEntity<Void>(HttpStatus.NOT_IMPLEMENTED);
+
+		try {
+			return transacaoService.atualiza(authorization, codigo, valor);
+		} catch (Exception e) {
+			return respostasUtil.getErroInterno(RespostasUtil.MENSAGEM_FALHA_AO_TENTAR_ATUALIZAR_TRANSACAO);
+		}
+
 	}
 
 	public ResponseEntity<Transacao> cadastraTransacao(
 			@ApiParam(value = "", required = true) @RequestHeader(value = "Authorization", required = true) String authorization,
 			@ApiParam(value = "", required = true) @Valid @RequestBody Transacao transacao,
-			@NotNull @ApiParam(value = "", required = true, allowableValues = "debito, deposito") 
-			@Valid @RequestParam(value = "tipo", required = true) String tipo) {
+			@NotNull @ApiParam(value = "", required = true, allowableValues = "debito, deposito") @Valid @RequestParam(value = "tipo", required = true) String tipo) {
 
 		try {
 			return transacaoService.salva(authorization, transacao, tipo);
