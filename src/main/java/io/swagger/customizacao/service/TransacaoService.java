@@ -209,4 +209,45 @@ public class TransacaoService {
 		return respostasUtil.getSucessoSemConteudo(MENSAGEM_TRANSACAO_ATUALIZADA_COM_SUCESSO);
 	}
 	
+	public ResponseEntity<Void> exclui(String authorization, Long codigo) {
+		ClienteEntity clienteEntity = clienteService.getClienteByAuthorization(authorization);
+		
+		if(clienteEntity == null) {
+			return respostasUtil.getNaoAutorizado(MENSAGEM_NAO_AUTORIZADO);
+		}
+		
+		TransacaoEntity transacaoEntity = transacoes.findById(codigo).get();
+		
+		if(transacaoEntity == null) {
+			return respostasUtil.getRegistroNaoEncontrado(MENSAGEM_TRANSACAO_NAO_ENCONTRADA);
+		}
+
+		ContaEntity contaEntity = transacaoEntity.getConta();
+		
+		if(contaEntity == null) {
+			return respostasUtil.getRequisicaoInvalida(MENSAGEM_NAO_FOI_POSSÍVEL_RECUPERAR_CONTA_ASSOCIADA_A_TRANSACAO);
+		}
+		
+		Double novoSaldo = 0d;
+		
+		if(DEPOSITO.equalsIgnoreCase(transacaoEntity.getTipo())){
+			novoSaldo = contaEntity.getSaldo() - transacaoEntity.getValor();
+		}else if(DEBITO.equalsIgnoreCase(transacaoEntity.getTipo())) {
+			novoSaldo = contaEntity.getSaldo() + transacaoEntity.getValor();
+		}else {
+			return respostasUtil.getRequisicaoInvalida(MENSAGEM_NAO_FOI_POSSÍVEL_ENCONTRAR_O_TIPO_DA_TRANSACAO);
+		}
+		
+		transacoes.deleteById(codigo);
+		
+		if(transacoes.existsById(codigo)) {
+			return respostasUtil.getRequisicaoInvalida(MENSAGEM_NAO_FOI_POSSÍVEL_EXCLUIR_A_TRANSACAO);
+		}
+		
+		contaEntity.setSaldo(novoSaldo);
+		contas.save(contaEntity);
+		
+		return respostasUtil.getSucessoSemConteudo(MENSAGEM_TRANSACAO_EXCLUÍDA_COM_SUCESSO);
+	}
+	
 }

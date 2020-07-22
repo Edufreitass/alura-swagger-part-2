@@ -20,6 +20,8 @@ public class RespostasUtil {
 	public static final String MENSAGEM_FALHA_AO_TENTAR_CONSULTAR_EXTRATO = "Falha ao tentar consultar extrato.";
 
 	public static final String MENSAGEM_FALHA_AO_TENTAR_CONSULTAR_SALDO = "Falha ao tentar consultar saldo.";
+	
+	public static final String MENSAGEM_FALHA_AO_TENTAR_EXCLUIR_TRANSACAO = "Falha ao tentar excluir transação.";
 
 	public static final String HEADER_MENSAGEM = "Mensagem: ";
 	
