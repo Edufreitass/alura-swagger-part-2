@@ -1,6 +1,6 @@
-# Swagger part 2: customizing a generated API
+# Swagger parte 2: customizando uma API gerada
 
-- Customize the alura-bytebank-api generated from the Swagger Editor Generate Server in the Swagger Course
-- Configure an existing API to generate interactive documentation with Swagger
-- Use the interactive documentation to find out what parameters are used to call each operation from a REST API
-- Consume APIs using the POSTMAN REST client
+- Customize a alura-bytebank-api gerada a partir do Generate Server do Swagger Editor no Curso Swagger
+- Configure uma API existente para gerar a documentação interativa com Swagger
+- Utilize a documentação interativa para conhecer quais parâmetros são utilizados para chamar cada operação de uma API REST
+- Consuma APIs utilizando o client REST POSTMAN
